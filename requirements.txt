@@ -1,0 +1,5 @@
+numpy
+vtk
+pylint
+matplotlib
+pyx
