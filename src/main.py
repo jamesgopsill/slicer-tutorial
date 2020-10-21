@@ -65,6 +65,7 @@ if __name__ == "__main__":
 
 	c.writePDFfile("out/shells+linear_x.pdf")
 
+
 	for line in linear_y_lines:
 		c.stroke(line, [pyx.style.linewidth(0.05), pyx.color.rgb.blue])
 

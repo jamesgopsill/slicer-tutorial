@@ -1,5 +1,11 @@
 # Slicer Tutorial
 
+This repository features a basic implementation of a slicer used in 3D printing to produce the print lines of the 3D printer to follow.
+
+![](figs/beam_stl.png)
+
+![](figs/final.png)
+
 # Running the code
 
 Use `python3 -m venv .venv` to create the virtual environment for the project.
