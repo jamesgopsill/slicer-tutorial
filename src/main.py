@@ -58,10 +58,14 @@ if __name__ == "__main__":
 	for shell in shells:
 		c.stroke(shell, [pyx.style.linewidth(0.05)])
 
+	c.writePDFfile("out/shells.pdf")
+
 	for line in linear_x_lines:
 		c.stroke(line, [pyx.style.linewidth(0.05), pyx.color.rgb.red])
+
+	c.writePDFfile("out/shells+linear_x.pdf")
 
 	for line in linear_y_lines:
 		c.stroke(line, [pyx.style.linewidth(0.05), pyx.color.rgb.blue])
 
-	c.writePDFfile("out/shells.pdf")
+	c.writePDFfile("out/shells+linear_x+linear_y.pdf")
