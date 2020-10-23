@@ -5,7 +5,7 @@ import pyx
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-	
+
 	# 3D printer stl file
 	file_name = "stls/solid_beam.stl"
 
@@ -17,7 +17,20 @@ if __name__ == "__main__":
 
 	# Get the min/max bounds for the STL
 	x_min, x_max, y_min, y_max, z_min, z_max = stl_poly.GetBounds()
-	print("X min:", x_min, "X max:", x_max, "Y min:", y_min, "Y max:", y_max, "Z min:", z_min, "Z max:", z_max)
+	print(
+		"X min:",
+		x_min,
+		"X max:",
+		x_max,
+		"Y min:",
+		y_min,
+		"Y max:",
+		y_max,
+		"Z min:",
+		z_min,
+		"Z max:",
+		z_max,
+	)
 
 	# Generate internal mesh structure of stl
 	stl_tree = vtk.vtkOBBTree()
@@ -25,7 +38,7 @@ if __name__ == "__main__":
 	stl_tree.BuildLocator()
 
 	# Set a slice level
-	level = ( z_min + z_max ) / 2
+	level = (z_min + z_max) / 2
 
 	# Create intersecting plane
 	plane = vtk.vtkPlane()
@@ -57,8 +70,12 @@ if __name__ == "__main__":
 	# Select the inner shells
 	# N.b. could build to handle multiple inner shells
 	mesh_width = 0.4
-	linear_x_lines = linear_mesh.linear_x(shells[-1], x_min-10, x_max+10, y_min-10, y_max+10, mesh_width)
-	linear_y_lines = linear_mesh.linear_y(shells[-1], x_min-10, x_max+10, y_min-10, y_max+10, mesh_width)
+	linear_x_lines = linear_mesh.linear_x(
+		shells[-1], x_min - 10, x_max + 10, y_min - 10, y_max + 10, mesh_width
+	)
+	linear_y_lines = linear_mesh.linear_y(
+		shells[-1], x_min - 10, x_max + 10, y_min - 10, y_max + 10, mesh_width
+	)
 
 	# Draw out the print lines
 
@@ -72,7 +89,6 @@ if __name__ == "__main__":
 		c.stroke(line, [pyx.style.linewidth(0.05), pyx.color.rgb.red])
 
 	c.writePDFfile("out/shells+linear_x.pdf")
-
 
 	for line in linear_y_lines:
 		c.stroke(line, [pyx.style.linewidth(0.05), pyx.color.rgb.blue])

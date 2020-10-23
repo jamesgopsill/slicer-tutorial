@@ -3,3 +3,6 @@ vtk
 pylint
 matplotlib
 pyx
+black-with-tabs
+typing-extensions
+mypy-extensions

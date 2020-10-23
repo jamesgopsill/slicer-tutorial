@@ -1,6 +1,7 @@
 import pyx
 import numpy as np
 
+
 def linear_x(shell, x_min, x_max, y_min, y_max, inc):
 
 	mesh_lines = []
@@ -19,6 +20,7 @@ def linear_x(shell, x_min, x_max, y_min, y_max, inc):
 
 	return mesh_lines
 
+
 def linear_y(shell, x_min, x_max, y_min, y_max, inc):
 
 	mesh_lines = []
@@ -36,4 +38,3 @@ def linear_y(shell, x_min, x_max, y_min, y_max, inc):
 			mesh_lines.append(pyx.path.line(x1, y1, x2, y2))
 
 	return mesh_lines
-

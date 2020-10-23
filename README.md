@@ -36,3 +36,13 @@ To run the example, enter:
 ```
 python src/main.py
 ```
+
+# Contributing
+
+Black-with-tabs is included as a tool to maintain a consistent code format. Please run it before you commit any code to clean up any additions you make. It's great and save you a lot of time in not having to think about the formatting.
+
+Simply run.
+
+```
+black src/
+```
