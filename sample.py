@@ -1,8 +1,9 @@
 import vtk
-from slicer.generate_shells import generate_shells
-import slicer.linear_mesh as linear_mesh
 import pyx
 import matplotlib.pyplot as plt
+
+import slicer
+
 
 if __name__ == "__main__":
 
@@ -61,19 +62,19 @@ if __name__ == "__main__":
 	cut_polys.SetPoints(cut_strips.GetOutput().GetPoints())
 	cut_polys.SetPolys(cut_strips.GetOutput().GetLines())
 
-	# Generate the outer shells
-	# TODO: create the ability to return internal shells
-	# Return as outer_shells, internal_shell = generate_shells()
-	# Where outer_shells is a list of lines for the outer_shells and internal_shells is a list of lists that would describe each internal shell and series of paths associated with it
-	shells = generate_shells(cut_polys, 3)
+	# Our amazing functions
+
+	shells = slicer.shell.exterior(cut_polys, 3)
+
+	# TODO: create shells for any interntal geometry (e.g. holes through the part)
 
 	# Select the inner shells
 	# N.b. could build to handle multiple inner shells
 	mesh_width = 0.4
-	linear_x_lines = linear_mesh.linear_x(
+	linear_x_lines = slicer.infill.linear_x(
 		shells[-1], x_min - 10, x_max + 10, y_min - 10, y_max + 10, mesh_width
 	)
-	linear_y_lines = linear_mesh.linear_y(
+	linear_y_lines = slicer.infill.linear_y(
 		shells[-1], x_min - 10, x_max + 10, y_min - 10, y_max + 10, mesh_width
 	)
 
@@ -94,5 +95,3 @@ if __name__ == "__main__":
 		c.stroke(line, [pyx.style.linewidth(0.05), pyx.color.rgb.blue])
 
 	c.writePDFfile("out/shells+linear_x+linear_y.pdf")
-
-	# TODO: Create a Gcode generator given the paths that want to be printed.

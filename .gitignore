@@ -3,3 +3,4 @@
 out/*
 !out/.gitkeep
 __pycache__
+docs/
