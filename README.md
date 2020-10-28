@@ -20,9 +20,6 @@ If you want to open and run on the command line then `cd` into the directory and
 ```
 # Linux/MacOS command
 source .venv/bin/activate
-
-# Windows command
-.venv\bin\activate
 ```
 
 which will activate the virtual environment.
