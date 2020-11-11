@@ -8,7 +8,7 @@ import slicer
 if __name__ == "__main__":
 
 	# 3D printer stl file
-	file_name = "stls/solid_beam.stl"
+	file_name = "stls/plate_with_hole.stl"
 
 	# Read in the STL
 	stl_file = vtk.vtkSTLReader()
@@ -62,11 +62,17 @@ if __name__ == "__main__":
 	cut_polys.SetPoints(cut_strips.GetOutput().GetPoints())
 	cut_polys.SetPolys(cut_strips.GetOutput().GetLines())
 
+	print(cut_polys.GetPolys())
+
 	# Our amazing functions
 
 	shells = slicer.shell.exterior(cut_polys, 3)
 
 	# TODO: create shells for any interntal geometry (e.g. holes through the part)
+
+	shells_int = slicer.shell.interior(cut_polys, 3)
+
+	print(shells_int)
 
 	# Select the inner shells
 	# N.b. could build to handle multiple inner shells
@@ -82,6 +88,10 @@ if __name__ == "__main__":
 
 	c = pyx.canvas.canvas()
 	for shell in shells:
+		c.stroke(shell, [pyx.style.linewidth(0.05)])
+
+	# Draw out internal shell
+	for shell in shells_int:
 		c.stroke(shell, [pyx.style.linewidth(0.05)])
 
 	c.writePDFfile("out/shells.pdf")
